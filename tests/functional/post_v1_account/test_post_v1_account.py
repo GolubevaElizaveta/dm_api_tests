@@ -11,7 +11,7 @@ def test_post_v1_account():
     login_api = LoginApi(host="http://5.63.153.31:5051")
     mailhog_api = MailhogApi(host="http://5.63.153.31:5025")
 
-    login = 'vmenshikov_test30'
+    login = 'vmenshikov_test32'
     email = f'{login}@mail.ru'
     password = '1234567891'
 
@@ -55,7 +55,7 @@ def test_post_v1_account():
     assert response.status_code == 200, "Пользователь не смог авторизоваться"
 
     # Меняем email
-    new_email = "new_email5@mail.ru"
+    new_email = "new_email7@mail.ru"
     json_data = {
         "login": login,
         "password": password,
@@ -82,13 +82,25 @@ def test_post_v1_account():
     old_token = get_activation_token_by_login(login, response)
     new_token = get_activation_token_by_login(new_email, response)
 
-    # Предполагая, что у вас есть старый токен, сохраненный в переменной old_token
+    # Предполагая, что у нас есть старый токен, сохраненный в переменной old_token
     assert new_token != old_token, f"Нет подтверждения смены email для {new_email}. Токен не изменился."
 
     # Активируем новый email
     response = account_api.put_v1_account_token(token=token)
     print(response.status_code)
     assert response.status_code == 200, "Новый email не был активирован"
+
+    # Логинимся с новым email
+    json_data = {
+        'login': login,
+        'password': password,
+        'rememberMe': True,
+    }
+
+    response = login_api.post_v1_account_login(json_data=json_data)
+    print(response.status_code)
+    print(response.text)
+    assert response.status_code == 200, "Пользователь не смог авторизоваться"
 
 def get_activation_token_by_login(login, response):
     token = None
