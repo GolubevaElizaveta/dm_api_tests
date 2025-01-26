@@ -6,13 +6,13 @@ from api_mailhog.apis.mailhog_api import MailhogApi
 
 
 
-def test_post_v1_account():
+def test_post_v1_account_email():
     # Регистрация пользователя
     account_api = AccountApi(host="http://5.63.153.31:5051")
     login_api = LoginApi(host="http://5.63.153.31:5051")
     mailhog_api = MailhogApi(host="http://5.63.153.31:5025")
 
-    login = 'egolubeva_test12'
+    login = 'egolubeva_test126'
     email = f'{login}@mail.ru'
     password = '1234567891'
 
@@ -56,7 +56,7 @@ def test_post_v1_account():
     assert response.status_code == 200, "Пользователь не смог авторизоваться"
 
     # Меняем email
-    new_email = "new_email103@mail.ru"
+    new_email = "new_email101@mail.ru"
     json_data = {
         "login": login,
         "password": password,
