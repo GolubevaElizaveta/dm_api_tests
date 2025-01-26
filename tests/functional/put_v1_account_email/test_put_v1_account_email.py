@@ -12,7 +12,7 @@ def test_post_v1_account_email():
     login_api = LoginApi(host="http://5.63.153.31:5051")
     mailhog_api = MailhogApi(host="http://5.63.153.31:5025")
 
-    login = 'egolubeva_test134'
+    login = 'egolubeva_test138'
     email = f'{login}@mail.ru'
     password = '1234567891'
 
@@ -56,7 +56,7 @@ def test_post_v1_account_email():
     assert response.status_code == 200, "Пользователь не смог авторизоваться"
 
     # Меняем email
-    new_email = "new_email105@mail.ru"
+    new_email = "new_email106@mail.ru"
     json_data = {
         "login": login,
         "password": password,
