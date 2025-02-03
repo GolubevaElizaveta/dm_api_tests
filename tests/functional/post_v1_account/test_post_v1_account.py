@@ -1,8 +1,6 @@
 from json import loads
 from json import JSONDecodeError
 
-from setuptools.logging import configure
-
 from dm_api_account.apis.account_api import AccountApi
 from dm_api_account.apis.login_api import LoginApi
 from api_mailhog.apis.mailhog_api import MailhogApi
@@ -28,7 +26,7 @@ def test_post_v1_account():
     login_api = LoginApi(configuration=dm_api_configuration)
     mailhog_api = MailhogApi(configuration=mailhog_configuration)
 
-    login = 'egolubeva_test152'
+    login = 'egolubeva_test156'
     email = f'{login}@mail.ru'
     password = '1234567891'
 
