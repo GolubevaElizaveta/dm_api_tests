@@ -23,20 +23,17 @@ def test_put_v1_account_email():
     mailhog = MailHogApi(configuration=mailhog_configuration)
     account_helper = AccountHelper(dm_account_api=account, mailhog=mailhog)
 
-    login = 'egolubeva_test211'
+    login = 'egolubeva_test228'
     email = f'{login}@mail.ru'
     password = '1234567891'
-    new_email = "new_email211@mail.ru"  # Определение new_email
+    new_email = "new_email224@mail.ru"  # Определение new_email
 
     # Регистрация и активация пользователя
     account_helper.register_new_user(login=login, password=password, email=email)
-
     # Авторизация пользователя
     account_helper.user_login(login=login, password=password)
-
     # Изменение email и активация нового email
     account_helper.update_user_email(login=login, password=password, new_email=new_email)
-
     # Попытка авторизации с новым email
     response = account_helper.user_login(login=login, password=password)
     assert response.status_code == 200, "Пользователь не смог авторизоваться"
