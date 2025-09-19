@@ -2,6 +2,7 @@ from collections import namedtuple
 from datetime import datetime
 
 import pytest
+import random
 
 from helpers.account_helper import AccountHelper
 from restclient.configuration import Configuration as MailhogConfiguration
@@ -50,11 +51,12 @@ def auth_account_helper(mailhog_api):
 
 @pytest.fixture
 def prepare_user():
-    now = datetime.now()
-    data = now.strftime("%d_%m_%Y_%H_%M_%S")
-    login = f'egolubeva_{data}'
-    email = f'{login}@mail.ru'
-    password = '1234567891'
-    User = namedtuple("user", ["login","password","email"])
-    user = User(login=login, password=password, email=email)
-    return user
+   now = datetime.now()
+   data = now.strftime("%d_%m_%Y_%H_%M_%S")
+   random_suffix = random.randint(1000, 9999)
+   login = f'egolubeva_{data}_{random_suffix}'
+   email = f'{login}@mail.ru'
+   password = '1234567891'
+   User = namedtuple("user", ["login", "password", "email"])
+   user = User(login=login, password=password, email=email)
+   return user
