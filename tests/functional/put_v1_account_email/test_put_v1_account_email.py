@@ -1,3 +1,4 @@
+from checkers.http_checkers import check_status_code_http
 from dm_api_account.models.login_credentials import LoginCredentials
 
 def test_put_v1_account_email(account_helper, prepare_user, remember_me=True):
@@ -14,13 +15,17 @@ def test_put_v1_account_email(account_helper, prepare_user, remember_me=True):
         password=password,
         remember_me=remember_me
     )
-    response = account_helper.dm_account_api.login_api.post_v1_account_login(
-        login_credentials=login_credentials,
-        validate_response=False
-    )
-    assert response.status_code == 403, f'Получен другой код ответа {response.status_code}'
+
+    with check_status_code_http(
+            expected_status_code=403,
+            expected_message="User is inactive. Address the technical support for more details"
+    ):
+        account_helper.dm_account_api.login_api.post_v1_account_login(
+            login_credentials=login_credentials,
+            validate_response=False
+        )
+
     token = account_helper.get_token(identifier=login, token_type="activation",identifier_type="login" )
     assert token is not None, f"Токен для пользователя {login} не был получен"
     account_helper.activate_user(token=token)
-    response = account_helper.user_login(login=login, password=password)
-    assert response.status_code == 200, "Пользователь не смог авторизоваться"
+    account_helper.user_login(login=login, password=password)
