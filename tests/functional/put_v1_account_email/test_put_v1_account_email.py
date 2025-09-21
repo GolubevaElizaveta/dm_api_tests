@@ -10,20 +10,11 @@ def test_put_v1_account_email(account_helper, prepare_user, remember_me=True):
     account_helper.user_login(login=login, password=password)
     account_helper.update_user_email(login=login, password=password, new_email=new_email)
 
-    login_credentials = LoginCredentials(
-        login=login,
-        password=password,
-        remember_me=remember_me
-    )
-
     with check_status_code_http(
             expected_status_code=403,
             expected_message="User is inactive. Address the technical support for more details"
     ):
-        account_helper.dm_account_api.login_api.post_v1_account_login(
-            login_credentials=login_credentials,
-            validate_response=False
-        )
+        account_helper.user_login(login=login, password=password)
 
     token = account_helper.get_token(identifier=login, token_type="activation",identifier_type="login" )
     assert token is not None, f"Токен для пользователя {login} не был получен"
