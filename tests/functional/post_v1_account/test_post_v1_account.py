@@ -27,6 +27,8 @@ class TestsPostV1Account:
         ("e", "egolubeva@mail.ru", "123456789", 400, "Validation failed", {"Login": ["Short"]}),
     ]
 )
+@allure.suite("Тесты на проверку метода POST v1/account")
+@allure.sub_suite("Негативные тесты")
 @allure.title("Проверка обработки неверных значений параметров")
 def test_post_v1_account_negative(account_helper, login, email, password, expected_status_code, expected_message, expected_errors):
     with check_status_code_http(
