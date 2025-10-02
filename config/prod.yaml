@@ -1,0 +1,6 @@
+service:
+  dm_api_account: "http://5.63.153.31:5051"
+  mailhog: "http://5.63.153.31:5025"
+user:
+  login: "egolubeva10001"
+  password: "123456789876543"
