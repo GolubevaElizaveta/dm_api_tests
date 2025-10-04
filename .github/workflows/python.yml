@@ -65,8 +65,8 @@ jobs:
       - name: Download allure results
         uses: actions/download-artifact@v4
       - name: Upload allure report
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1.2.9
+        uses: actions/deploy-pages@v4
       - run: echo "https://github.com/GolubevaElizaveta/dm_api_tests/"
