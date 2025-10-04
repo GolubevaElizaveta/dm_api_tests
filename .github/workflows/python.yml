@@ -70,5 +70,3 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v1.2.9
       - run: echo "https://github.com/GolubevaElizaveta/dm_api_tests/"
-
-
