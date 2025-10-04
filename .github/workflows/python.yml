@@ -25,7 +25,7 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest ./tests --alluredir=allure-results
+          pytest ./tests --alluredir=allure-results --disable-warnings
         continue-on-error: true
 
       - name: Archive allure results
@@ -62,11 +62,12 @@ jobs:
     needs: generate-report
     name: Publish report
     steps:
-      - name: Download allure results
+      - uses: actions/checkout@v4
+      - name: Download site report
         uses: actions/download-artifact@v4
-      - name: Upload allure report
+      - name: Upload pages artifact
         uses: actions/upload-pages-artifact@v3
-      - name: Deploy to Github Pages
+      - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
       - run: echo "https://github.com/GolubevaElizaveta/dm_api_tests/"
