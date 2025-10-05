@@ -1,4 +1,4 @@
-from packeges.restclient import Configuration
+from packeges.restclient.configuration import Configuration
 from clients.http.api_mailhog.apis.mailhog_api import MailhogApi
 
 

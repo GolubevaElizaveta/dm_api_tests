@@ -1,6 +1,6 @@
 import allure
 
-from clients.http.dm_api_account.models import ChangeEmail
+from clients.http.dm_api_account.models.change_email import ChangeEmail
 from clients.http.dm_api_account.models.change_password import ChangePassword
 from clients.http.dm_api_account.models.login_credentials import LoginCredentials
 from clients.http.dm_api_account.models.registration import Registration

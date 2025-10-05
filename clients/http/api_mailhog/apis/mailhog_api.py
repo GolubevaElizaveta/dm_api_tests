@@ -1,5 +1,6 @@
 import allure
-from packeges.restclient import RestClient
+
+from packeges.restclient.client import RestClient
 
 class MailhogApi(RestClient):
     @allure.step("Получить все письма")
