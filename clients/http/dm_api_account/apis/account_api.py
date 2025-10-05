@@ -1,13 +1,12 @@
 import allure
-import requests
 
-from dm_api_account.models.change_email import ChangeEmail
-from dm_api_account.models.change_password import ChangePassword
-from dm_api_account.models.registration import Registration
-from dm_api_account.models.reset_password import ResetPassword
-from dm_api_account.models.user_details_envelope import UserDetailsEnvelope
-from dm_api_account.models.user_envelope import UserEnvelope
-from restclient.client import RestClient
+from clients.http.dm_api_account.models.change_email import ChangeEmail
+from clients.http.dm_api_account.models.change_password import ChangePassword
+from clients.http.dm_api_account.models.registration import Registration
+from clients.http.dm_api_account.models.reset_password import ResetPassword
+from clients.http.dm_api_account.models.user_details_envelope import UserDetailsEnvelope
+from clients.http.dm_api_account.models.user_envelope import UserEnvelope
+from packeges.restclient import RestClient
 
 
 class AccountApi(RestClient):

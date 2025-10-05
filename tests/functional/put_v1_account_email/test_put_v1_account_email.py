@@ -1,7 +1,7 @@
 import allure
 
 from checkers.http_checkers import check_status_code_http
-from dm_api_account.models.login_credentials import LoginCredentials
+
 
 @allure.suite("Тесты на проверку метода PUT v1/account/email")
 @allure.sub_suite("Позитивные тесты")
