@@ -30,3 +30,4 @@ typing_extensions==4.15.0
 urllib3==2.5.0
 vyper-config==1.2.1
 watchdog==6.0.0
+swagger-coverage @https://github.com/GolubevaElizaveta/swagger-coverage-py/archive/refs/heads/master.zip
