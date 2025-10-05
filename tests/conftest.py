@@ -7,7 +7,7 @@ import random
 
 from requests import options
 from pathlib import Path
-
+from packages.notifier.bot import send_file
 from swagger_coverage_py.reporter import CoverageReporter
 from vyper import v
 from helpers.account_helper import AccountHelper
@@ -44,6 +44,7 @@ def setup_swagger_coverage():
     reporter.cleanup_input_files()
     yield
     reporter.generate_report()
+    #send_file()
 
 @pytest.fixture(scope='session', autouse=True)
 def set_config(request):

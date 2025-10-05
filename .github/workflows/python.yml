@@ -24,8 +24,14 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
 
-      - name: Set JAVA-HOME
-        run: echo "JAVA-HOME=$(dirname $(dirname $(readlink -f $(which java))))" >> $GITHUB_ENV
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+
+      - name: Set JAVA_HOME
+        run: echo "JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))" >> $GITHUB_ENV
 
       - name: Install dependencies
         run: |
@@ -33,9 +39,9 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run tests
-        run:
+        run: |
           export JAVA_HOME=$JAVA_HOME
-          pytest ./tests --alluredir=allure-results
+          pytest ./tests --alluredir=allure-results --disable-warnings
         continue-on-error: true
 
       - name: Run Coverage
