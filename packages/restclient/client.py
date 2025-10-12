@@ -2,8 +2,11 @@ import structlog
 from requests import (session,JSONDecodeError)
 import uuid
 import curlify
+from swagger_coverage_py.request_schema_handler import RequestSchemaHandler
+from swagger_coverage_py.uri import URI
 
-from restclient.configuration import Configuration
+from packages.restclient.configuration import Configuration
+from packages.restclient.utilities import allure_attach
 
 
 class RestClient:
@@ -33,6 +36,7 @@ class RestClient:
     def delete(self, path, **kwargs):
         return self._send_request(method='DELETE', path=path, **kwargs)
 
+    @allure_attach
     def _send_request(self, method, path, **kwargs):
         log = self.log.bind(event_id=str(uuid.uuid4()))
         full_url = self.host + path
@@ -53,6 +57,11 @@ class RestClient:
         )
         rest_response = self.session.request(method=method, url=full_url, **kwargs)
         curl = curlify.to_curl(rest_response.request)
+        uri = URI(host=self.host, base_path="", unformatted_path=path, uri_params=kwargs.get('params'))
+        RequestSchemaHandler(
+            uri, method.lower(), rest_response, kwargs
+        ).write_schema()
+
         print(curl)
         log.msg(
             event='Response',

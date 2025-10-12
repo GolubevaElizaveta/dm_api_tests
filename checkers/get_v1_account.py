@@ -1,5 +1,6 @@
 from datetime import datetime
 
+import allure
 from hamcrest import (
     assert_that,
     all_of,
@@ -14,21 +15,22 @@ class GetV1Account:
 
     @classmethod
     def check_response_get_v1_account(cls, response):
-        assert_that(
-            response, all_of(
-                has_property(
-                    'resource', has_properties(
-                        {
-                            'login': starts_with("egolubeva"),
-                            'roles': has_items("Guest", "Player"),
-                            'rating': has_properties(
-                                {
-                                    "quality": greater_than_or_equal_to(0),
-                                    "quantity": greater_than_or_equal_to(0)
-                                }
-                            )
-                        }
+        with allure.step("Проверка соответствия данных аккаунта в ответе"):
+            assert_that(
+                response, all_of(
+                    has_property(
+                        'resource', has_properties(
+                            {
+                                'login': starts_with("egolubeva"),
+                                'roles': has_items("Guest", "Player"),
+                                'rating': has_properties(
+                                    {
+                                        "quality": greater_than_or_equal_to(0),
+                                        "quantity": greater_than_or_equal_to(0)
+                                    }
+                                )
+                            }
+                        )
                     )
                 )
             )
-        )

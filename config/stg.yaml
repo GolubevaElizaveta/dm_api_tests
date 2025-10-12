@@ -4,3 +4,7 @@ service:
 user:
   login: "egolubeva10001"
   password: "123456789876543"
+
+telegram:
+  chat_id: "-1003148505176"
+  token: "8215700245:AAEGK1VyegiGD5WemmM_L-4wSw5rrbTR_rA"

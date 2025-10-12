@@ -1,16 +1,17 @@
-import requests
+import allure
 
-from dm_api_account.models.change_email import ChangeEmail
-from dm_api_account.models.change_password import ChangePassword
-from dm_api_account.models.registration import Registration
-from dm_api_account.models.reset_password import ResetPassword
-from dm_api_account.models.user_details_envelope import UserDetailsEnvelope
-from dm_api_account.models.user_envelope import UserEnvelope
-from restclient.client import RestClient
+from clients.http.dm_api_account.models.change_email import ChangeEmail
+from clients.http.dm_api_account.models.change_password import ChangePassword
+from clients.http.dm_api_account.models.registration import Registration
+from clients.http.dm_api_account.models.reset_password import ResetPassword
+from clients.http.dm_api_account.models.user_details_envelope import UserDetailsEnvelope
+from clients.http.dm_api_account.models.user_envelope import UserEnvelope
+from packages.restclient.client import RestClient
+
 
 
 class AccountApi(RestClient):
-
+    @allure.step("Зарегистрировать нового пользователя")
     def post_v1_account(
             self,
             registration: Registration
@@ -25,6 +26,7 @@ class AccountApi(RestClient):
         )
         return response
 
+    @allure.step("Активировать нового пользователя")
     def put_v1_account_token(
             self,
             token,
@@ -46,6 +48,7 @@ class AccountApi(RestClient):
             return UserEnvelope(**response.json())
         return response
 
+    @allure.step("Смена почты у зарегестрированного пользователя")
     def put_v1_account_email(
             self,
             change_email: ChangeEmail,
@@ -63,6 +66,7 @@ class AccountApi(RestClient):
             return UserEnvelope(**response.json())
         return response
 
+    @allure.step("Получить информацию о пользователе")
     def get_v1_account(
             self,
             validate_response=True,
@@ -80,6 +84,7 @@ class AccountApi(RestClient):
             return UserDetailsEnvelope(**response.json())
         return response
 
+    @allure.step("Сбросить пароль зарегистрированного пользователя")
     def post_v1_account_password(
             self,
             reset_password: ResetPassword,
@@ -100,6 +105,7 @@ class AccountApi(RestClient):
             return UserEnvelope(**response.json())
         return response
 
+    @allure.step("Сменить пароль зарегистрированному пользователю")
     def put_v1_account_password(
             self,
             change_password: ChangePassword,
